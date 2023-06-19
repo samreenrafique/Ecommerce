@@ -1,3 +1,14 @@
+<?php
+	session_start();
+	//initialize cart if not set or is unset
+	if(!isset($_SESSION['cart'])){
+		$_SESSION['cart'] = array();
+	}
+ 
+ 
+	//unset quantity
+	unset($_SESSION['qty_array']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,6 +44,20 @@
                   Our <span>products</span>
                </h2>
             </div>
+            <?php
+if(isset($_SESSION['message'])){
+   ?>
+   <div class="row">
+      <div class="col-sm-6 col-sm-offset-6">
+         <div class="alert alert-info text-center">
+            <?php echo $_SESSION['message']; ?>
+         </div>
+      </div>
+   </div>
+   <?php
+   unset($_SESSION['message']);
+}
+            ?>
             <center>
             <div class="container d-flex flex-row-reverse">
                <form action="" method="get">
@@ -106,7 +131,7 @@
                                     <a href="" class="option1">
                                        <?php echo $convert_array[1]; ?>
                                     </a>
-                                    <a href="" class="option2">
+                                    <a href="addtocart.php?id=<?php echo $convert_array[0]; ?>" class="option2">
                                     Buy Now
                                     </a>
                                  </div>
